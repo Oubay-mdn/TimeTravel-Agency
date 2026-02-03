@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import DestinationModal from './DestinationModal';
 
 const DestinationCard = ({ title, date, location, image, description, price, index, onOpenModal }) => (
@@ -154,10 +154,14 @@ const DestinationsSection = () => {
         </div>
       </div>
 
-      <DestinationModal
-        destination={selectedDestination}
-        onClose={() => setSelectedDestination(null)}
-      />
+      <AnimatePresence>
+        {selectedDestination && (
+          <DestinationModal
+            destination={selectedDestination}
+            onClose={() => setSelectedDestination(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };
