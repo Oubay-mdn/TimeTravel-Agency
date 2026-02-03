@@ -5,6 +5,8 @@ Webapp immersive pour une agence de voyage temporel de luxe, permettant de déco
 ## 🛠️ Stack Technique
 
 *   **Frontend** : React + Tailwind CSS (Vite)
+*   **Backend** : Node.js + Express
+*   **IA** : Groq API (Llama 3.3 70B)
 *   **Icônes** : Lucide React
 *   **Animations** : Framer Motion
 *   **Déploiement** : Vercel / Netlify (Compatible)
@@ -37,10 +39,42 @@ Webapp immersive pour une agence de voyage temporel de luxe, permettant de déco
     npm install
     ```
 
-3.  **Lancer le projet**
+3.  **Configurer l'API Groq (pour le chatbot IA)**
+    
+    a. Créer un compte gratuit sur [console.groq.com](https://console.groq.com)
+    
+    b. Obtenir votre clé API gratuite
+    
+    c. Créer un fichier `.env` à la racine du projet :
     ```bash
+    cp .env.example .env
+    ```
+    
+    d. Modifier `.env` et ajouter votre clé :
+    ```env
+    GROQ_API_KEY=votre_cle_api_ici
+    PORT=3001
+    ```
+
+4.  **Lancer le projet**
+    
+    **Option 1 - Tout en une commande (recommandé) :**
+    ```bash
+    npm run dev:full
+    ```
+    
+    **Option 2 - Frontend et Backend séparément :**
+    ```bash
+    # Terminal 1 - Backend (Groq API)
+    npm run server
+    
+    # Terminal 2 - Frontend
     npm run dev
     ```
+
+5.  **Accéder à l'application**
+    - Frontend : `http://localhost:5173`
+    - Backend API : `http://localhost:3001`
 
 ## 📄 Crédits & Licence
 

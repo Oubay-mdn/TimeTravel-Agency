@@ -23,42 +23,35 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const generateResponse = (text) => {
-    const lowerText = text.toLowerCase();
+  const sendMessageToAI = async (message, history) => {
+    try {
+      const response = await fetch('http://localhost:3001/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message,
+          conversationHistory: history.map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'assistant',
+            content: msg.text
+          }))
+        }),
+      });
 
-    // Florence Logic
-    if (lowerText.match(/art|peinture|renaissance|italie|florence|michel|vinci|culture|musée/)) {
-      return "Ah, une âme sensible à la beauté ! Pour les amateurs d'art et de raffinement, je ne peux que recommander **Florence en 1504**. C'est l'apogée de la Renaissance, vous y croiserez Michel-Ange et Léonard de Vinci en personne !";
+      if (!response.ok) {
+        throw new Error('Erreur de communication avec le serveur');
+      }
+
+      const data = await response.json();
+      return data.response;
+    } catch (error) {
+      console.error('Erreur API:', error);
+      return "Désolé, je rencontre un problème technique. Assurez-vous que le serveur backend est démarré (npm run server).";
     }
-
-    // Paris Logic
-    if (lowerText.match(/paris|eiffel|tour|1889|romantique|amour|fête|exposition|lumière/)) {
-      return "Excellent choix ! **Paris en 1889** est magique. L'inauguration de la Tour Eiffel, les bals fastueux... C'est l'époque idéale pour le romantisme et l'émerveillement technologique.";
-    }
-
-    // Dino Logic
-    if (lowerText.match(/dino|action|aventure|nature|t-rex|danger|saurien|jurassique|crétacé/)) {
-      return "Vous cherchez le grand frisson ? Le **Crétacé (-65M d'années)** est notre destination la plus sauvage. Face-à-face avec un T-Rex garanti, en toute sécurité bien sûr grâce à nos dômes invisibles.";
-    }
-
-    // Safety/Price Logic
-    if (lowerText.match(/prix|cher|tarif|coût/)) {
-      return "Nos expériences débutent à **12 500 €**. C'est le prix de l'exclusivité, d'une sécurité absolue et d'un service de conciergerie temporelle disponible 24h/24.";
-    }
-
-    if (lowerText.match(/sécurité|dangereux|risque|peur/)) {
-      return "La sécurité est notre priorité absolue. Nos capsules temporelles sont certifiées 'Zero-Paradox' et nos gardes du corps sont invisibles mais omniprésents. Vous ne courrez aucun risque, même face à un dinosaure.";
-    }
-
-    if (lowerText.match(/bonjour|salut|hello|coucou/)) {
-      return "Bonjour à vous ! Prêt à voyager dans le temps ?";
-    }
-
-    // Default Fallback
-    return "C'est fascinant. Dites-m'en plus sur ce que vous recherchez. Êtes-vous plutôt **Art et Culture**, **Romantisme**, ou **Aventure Extrême** ?";
   };
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
@@ -67,13 +60,13 @@ const Chatbot = () => {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate thinking delay
-    setTimeout(() => {
-      const responseText = generateResponse(userMessage.text);
-      const botMessage = { id: Date.now() + 1, text: responseText, sender: 'bot' };
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1500);
+    // Get AI response with conversation history
+    const history = messages.filter(msg => msg.sender !== 'system');
+    const responseText = await sendMessageToAI(userMessage.text, history);
+
+    const botMessage = { id: Date.now() + 1, text: responseText, sender: 'bot' };
+    setMessages(prev => [...prev, botMessage]);
+    setIsTyping(false);
   };
 
   return (
@@ -115,8 +108,8 @@ const Chatbot = () => {
                   >
                     <div
                       className={`max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed ${msg.sender === 'user'
-                          ? 'bg-gold-500 text-dark-900 rounded-br-none font-medium'
-                          : 'bg-dark-800 text-gray-200 border border-white/10 rounded-bl-none'
+                        ? 'bg-gold-500 text-dark-900 rounded-br-none font-medium'
+                        : 'bg-dark-800 text-gray-200 border border-white/10 rounded-bl-none'
                         }`}
                     >
                       {/* Parse bold text */}
