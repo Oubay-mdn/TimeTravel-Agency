@@ -1,22 +1,29 @@
 import React from 'react';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
 
-const DestinationCard = ({ title, date, location, image, description }) => (
-  <div className="group relative overflow-hidden bg-dark-800 border border-white/5 hover:border-gold-400/30 transition-all duration-500">
+const DestinationCard = ({ title, date, location, image, description, price }) => (
+  <div className="group relative overflow-hidden bg-dark-800 border border-white/5 hover:border-gold-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-gold-900/20 hover:-translate-y-1">
     <div className="aspect-[3/4] overflow-hidden relative">
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-80 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent opacity-90 z-10"></div>
       <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
 
-      <div className="absolute bottom-0 left-0 w-full p-6 z-20">
-        <div className="flex items-center gap-4 mb-3 text-gold-400 text-sm tracking-widest uppercase font-medium">
-          <span className="flex items-center gap-1"><Calendar className="w-4 h-4" /> {date}</span>
+      <div className="absolute top-4 right-4 z-20">
+        <span className="bg-dark-900/80 backdrop-blur-md border border-gold-400/30 text-gold-400 px-4 py-1 text-sm font-bold tracking-wider rounded-sm">
+          {price}
+        </span>
+      </div>
+
+      <div className="absolute bottom-0 left-0 w-full p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+        <div className="flex items-center gap-4 mb-2 text-gold-400 text-xs tracking-[0.2em] uppercase font-bold">
+          <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {date}</span>
+          <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {location}</span>
         </div>
-        <h3 className="text-3xl font-serif text-white mb-2">{title}</h3>
-        <p className="text-gray-400 text-sm mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+        <h3 className="text-3xl font-serif text-white mb-3 group-hover:text-gold-100 transition-colors">{title}</h3>
+        <p className="text-gray-300 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 line-clamp-3">
           {description}
         </p>
-        <button className="flex items-center gap-2 text-white hover:text-gold-400 transition-colors text-sm uppercase tracking-widest font-semibold">
-          Réserver <ArrowRight className="w-4 h-4" />
+        <button className="w-full py-3 bg-transparent border border-white/20 text-white hover:bg-gold-400 hover:border-gold-400 hover:text-dark-900 transition-all duration-300 text-sm uppercase tracking-widest font-semibold flex items-center justify-center gap-2 group-hover:bg-gold-400 group-hover:text-dark-900">
+          En savoir plus <ArrowRight className="w-4 h-4" />
         </button>
       </div>
     </div>
@@ -30,21 +37,24 @@ const DestinationsSection = () => {
       date: "1889",
       location: "Paris, France",
       image: "/paris-1889.png",
-      description: "Vivez l'Exposition Universelle et l'inauguration de la Tour Eiffel dans une ambiance de faste et de progrès."
+      description: "Plongez dans l'effervescence de l'Exposition Universelle. Flânez sous la tour Eiffel flambant neuve et découvrez le Paris des artistes et des inventeurs.",
+      price: "12 500 €"
     },
     {
       title: "Florence Renaissance",
       date: "1504",
       location: "Florence, Italie",
       image: "/florence-1504.png",
-      description: "Rencontrez Michel-Ange et Léonard de Vinci au cœur de la cité des arts. Une immersion culturelle absolue."
+      description: "Côtoyez les génies de la Renaissance. Assistez à la création du David de Michel-Ange et arpentez les rues d'une Florence à son apogée culturelle.",
+      price: "15 000 €"
     },
     {
       title: "Ère des Titans",
       date: "-65M Années",
       location: "Pangée",
       image: "/dino.png",
-      description: "Observez les géants du Crétacé depuis notre station orbitale sécurisée ou nos bulles d'observation terrestres."
+      description: "Une aventure primitive sécurisée. Observez le T-Rex régner sur son territoire depuis nos dômes d'observation invisibles. L'expérience sauvage ultime.",
+      price: "25 000 €"
     },
   ];
 
