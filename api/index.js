@@ -15,7 +15,13 @@ const groq = new Groq({
 });
 
 // Middleware
-app.use(cors());
+// Important pour Vercel : on autorise toutes les origines ou on spécifie le frontend
+app.use(cors({
+    origin: '*', // Tu pourras restreindre à ton URL Vercel plus tard si besoin
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 // System prompt for the TimeTravel Agency chatbot
@@ -57,7 +63,7 @@ app.post('/api/chat', async (req, res) => {
 
         // Call Groq API
         const completion = await groq.chat.completions.create({
-            model: 'llama-3.3-70b-versatile', // Fast and powerful
+            model: 'llama-3.3-70b-versatile',
             messages: messages,
             temperature: 0.7,
             max_tokens: 500,
@@ -83,10 +89,24 @@ app.post('/api/chat', async (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'OK', message: 'Serveur Groq AI fonctionnel' });
+    res.json({ status: 'OK', message: 'Serveur Groq AI fonctionnel sur Vercel' });
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Serveur backend démarré sur http://localhost:${PORT}`);
-    console.log(`✅ Groq API configurée`);
+// Route par défaut pour éviter les 404 sur la racine de l'API
+app.get('/api', (req, res) => {
+    res.json({ message: 'API TimeTravel Agency Ready' });
 });
+
+// --- MODIFICATION CRUCIALE POUR VERCEL ---
+
+// On ne lance le serveur avec app.listen QUE si on est en local.
+// Sur Vercel, c'est Vercel qui gère ça via l'export.
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Serveur backend démarré sur http://localhost:${PORT}`);
+        console.log(`✅ Groq API configurée`);
+    });
+}
+
+// On exporte l'app pour que Vercel puisse l'utiliser comme une fonction Serverless
+export default app;
