@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Calendar, MapPin, Clock, Star, CheckCircle, ArrowLeft, Loader } from 'lucide-react';
 
-const DestinationModal = ({ destination, onClose }) => {
-  const [view, setView] = useState('details'); // 'details', 'form', 'success'
+const DestinationModal = ({ destination, onClose, initialView = 'details' }) => {
+  const [view, setView] = useState(initialView); // 'details', 'form', 'success'
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -13,13 +13,13 @@ const DestinationModal = ({ destination, onClose }) => {
     travelers: 1
   });
 
-  // Initialize destination in form when prop changes
+  // Initialize destination and view when prop changes
   useEffect(() => {
     if (destination) {
       setFormData(prev => ({ ...prev, destination: destination.title }));
-      setView('details'); // Reset view when opening new destination
+      setView(initialView); // Use prop to set initial view state
     }
-  }, [destination]);
+  }, [destination, initialView]);
 
   // Prevent background scrolling when modal is open
   useEffect(() => {
