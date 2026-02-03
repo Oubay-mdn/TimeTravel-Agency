@@ -16,7 +16,7 @@ Webapp immersive pour une agence de voyage temporel de luxe, permettant de déco
 *   **Landing Page Immersive** : Hero section avec vidéo d'ambiance et présentation agence "Luxe".
 *   **Galerie Destinations** : Cards interactives pour **Paris 1889**, **Crétacé (-65M)** et **Florence 1504**.
 *   **Modales de Détails** : Pop-ups fluides avec informations approfondies (points forts, description immersive) et prix.
-*   **Chatbot IA (Simulé)** : Widget conversationnel **"Chronos"** avec personnalité "Guide Historien" (répond intelligemment aux mots-clés : prix, destinations, art, danger, etc.).
+*   **Chatbot IA Groq** : Widget conversationnel **"Chronos"** propulsé par **Groq AI (Llama 3.3 70B)** - Répond intelligemment aux questions sur les destinations avec contexte conversationnel.
 *   **Quiz de Recommandation** : Algorithme interactif (4 questions) suggérant la destination idéale selon le profil utilisateur (Culture vs Aventure vs Élégance).
 *   **Système de Réservation** : Formulaire intégré dans la modale avec validation automatique simulée et message de succès.
 
