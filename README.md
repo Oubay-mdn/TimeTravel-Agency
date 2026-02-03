@@ -46,3 +46,8 @@ Webapp immersive pour une agence de voyage temporel de luxe, permettant de déco
 
 Projet pédagogique - M1/M2 Digital & IA.
 Concept original : **TimeTravel Agency**.
+Membres : 
+* Oubay MOUDDEN
+* Adam CHOUAG
+* Ryad MURAD
+

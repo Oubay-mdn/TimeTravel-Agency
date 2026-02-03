@@ -46,6 +46,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          onClick={() => document.getElementById('destinations')?.scrollIntoView({ behavior: 'smooth' })}
           className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gold-400 text-dark-900 font-semibold text-lg hover:bg-gold-300 transition-colors duration-300 rounded-sm"
         >
           <span>Réserver mon voyage</span>
