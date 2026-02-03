@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import AgencySection from './components/AgencySection';
 import DestinationsSection from './components/DestinationsSection';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <DestinationsSection />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 }
