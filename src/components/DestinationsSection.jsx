@@ -29,21 +29,21 @@ const DestinationsSection = () => {
       title: "Paris Belle Époque",
       date: "1889",
       location: "Paris, France",
-      image: "https://images.unsplash.com/photo-1549144511-f099e773c147?q=80&w=2574&auto=format&fit=crop",
+      image: "/paris-1889.png",
       description: "Vivez l'Exposition Universelle et l'inauguration de la Tour Eiffel dans une ambiance de faste et de progrès."
     },
     {
       title: "Florence Renaissance",
       date: "1504",
       location: "Florence, Italie",
-      image: "https://images.unsplash.com/photo-1543429776-277adcf5207d?q=80&w=2670&auto=format&fit=crop",
+      image: "/florence-1504.png",
       description: "Rencontrez Michel-Ange et Léonard de Vinci au cœur de la cité des arts. Une immersion culturelle absolue."
     },
     {
       title: "Ère des Titans",
       date: "-65M Années",
       location: "Pangée",
-      image: "https://images.unsplash.com/photo-1518066000714-58c45f1a2c0a?q=80&w=2576&auto=format&fit=crop",
+      image: "/dino.png",
       description: "Observez les géants du Crétacé depuis notre station orbitale sécurisée ou nos bulles d'observation terrestres."
     },
   ];

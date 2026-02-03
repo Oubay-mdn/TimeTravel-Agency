@@ -40,7 +40,7 @@ const AgencySection = () => {
             <div className="aspect-[4/5] rounded-sm overflow-hidden relative">
               <div className="absolute inset-0 border-2 border-gold-400/30 translate-x-4 translate-y-4"></div>
               <img
-                src="https://images.unsplash.com/photo-1542259659-4ab2b1ee3f93?q=80&w=1964&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=2074&auto=format&fit=crop"
                 alt="Intérieur luxueux"
                 className="w-full h-full object-cover relative z-10"
               />

@@ -8,11 +8,15 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-dark-900/60 via-dark-900/40 to-dark-900 z-10"></div>
         {/* Placeholder for background image - using a high quality historical/abstract image */}
-        <img
-          src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?q=80&w=2074&auto=format&fit=crop"
-          alt="Historical atmosphere"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover"
-        />
+        >
+          <source src="/VideoSansSousTitres.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Content */}
