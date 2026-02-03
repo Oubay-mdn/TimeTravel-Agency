@@ -1,12 +1,19 @@
 import React from 'react';
 import { Shield, Star, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const AgencySection = () => {
   return (
     <section id="about" className="py-24 bg-dark-900 relative">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center gap-16">
-          <div className="md:w-1/2">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="md:w-1/2"
+          >
             <h2 className="text-gold-400 text-sm tracking-[0.2em] uppercase mb-4 font-bold">L'Excellence Temporelle</h2>
             <h3 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">
               Une agence hors du <br /> commun
@@ -34,9 +41,15 @@ const AgencySection = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="md:w-1/2 relative">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="md:w-1/2 relative"
+          >
             <div className="aspect-[4/5] rounded-sm overflow-hidden relative">
               <div className="absolute inset-0 border-2 border-gold-400/30 translate-x-4 translate-y-4"></div>
               <img
@@ -45,7 +58,7 @@ const AgencySection = () => {
                 className="w-full h-full object-cover relative z-10"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

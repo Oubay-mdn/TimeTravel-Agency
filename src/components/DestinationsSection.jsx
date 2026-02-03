@@ -1,8 +1,15 @@
 import React from 'react';
 import { ArrowRight, Calendar, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const DestinationCard = ({ title, date, location, image, description, price }) => (
-  <div className="group relative overflow-hidden bg-dark-800 border border-white/5 hover:border-gold-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-gold-900/20 hover:-translate-y-1">
+const DestinationCard = ({ title, date, location, image, description, price, index }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+    className="group relative overflow-hidden bg-dark-800 border border-white/5 hover:border-gold-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-gold-900/20 hover:-translate-y-1"
+  >
     <div className="aspect-[3/4] overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/40 to-transparent opacity-90 z-10"></div>
       <img src={image} alt={title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
@@ -27,7 +34,7 @@ const DestinationCard = ({ title, date, location, image, description, price }) =
         </button>
       </div>
     </div>
-  </div>
+  </motion.div>
 );
 
 const DestinationsSection = () => {
@@ -62,20 +69,44 @@ const DestinationsSection = () => {
     <section id="destinations" className="py-24 bg-dark-900 border-t border-white/5">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-gold-400 text-sm tracking-[0.2em] uppercase font-bold">Nos Voyages</span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mt-4">Destinations Légendaires</h2>
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-gold-400 text-sm tracking-[0.2em] uppercase font-bold"
+          >
+            Nos Voyages
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl md:text-5xl font-serif font-bold text-white mt-4"
+          >
+            Destinations Légendaires
+          </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {destinations.map((dest, index) => (
-            <DestinationCard key={index} {...dest} />
+            <DestinationCard key={index} {...dest} index={index} />
           ))}
         </div>
 
         <div className="text-center mt-16">
-          <button className="px-8 py-3 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-dark-900 transition-colors uppercase tracking-widest text-sm font-semibold">
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 border border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-dark-900 transition-colors uppercase tracking-widest text-sm font-semibold"
+          >
             Voir toutes les époques
-          </button>
+          </motion.button>
         </div>
       </div>
     </section>
